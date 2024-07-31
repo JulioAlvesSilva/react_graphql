@@ -1,0 +1,104 @@
+.container{
+    margin-top: 130px;
+}
+.ctn{
+    display: flex;
+    justify-content: space-around;
+    height: 78vh;
+    padding: 10px;
+    &_left{
+        width: 50%;
+        padding: 10px;
+        overflow-y:scroll;
+        overflow-x: hidden;
+    }
+    &_rigth{
+        width: 38%;
+        border: 1px solid rgba(128, 128, 128, 0.1);
+        border-radius: 20px;
+        box-shadow: 10px 10px 10px gray;
+        padding: 20px;
+        &_1ln{
+            display: flex;
+            justify-content: space-between;
+            img{
+                width: 30%;
+                border-radius: 10px;
+            }
+            &_tx{
+                display: flex;
+                flex-direction: column;
+                width: 60%;
+            }
+        }
+        &_2ln{
+            margin-top: 20px;
+        }
+    }
+}
+.lista {
+    justify-content: space-around;
+    height: 120px;
+    margin: auto;
+    align-items: center;
+    &_fotoPerfil {
+        width: 70px;
+        border-radius: 10px;
+    }
+
+    &_textos {
+        display: flex;
+        width: 85%;
+        justify-content: space-between;
+
+        &_1pg {
+            display: flex;
+            justify-content: space-around;
+            flex-direction: column;
+            height: 80px;
+        }
+
+        &_2pg {
+            display: flex;
+            justify-content: space-around;
+            flex-direction: column;
+
+            &_icons {
+                display: flex;
+                justify-content: space-between;
+                width: 50%;
+
+                svg {
+                    font-size: 1.5rem;
+
+                    &:hover {
+                        color: rgb(0, 255, 0);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.zoom {
+    transform: scaleX(1.01);
+}
+
+.titulo {
+    position: fixed;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: white;
+    top: 85px;
+    h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: rgb(63, 63, 63);
+        text-align: center;
+    }
+}
+.popup{
+    z-index: 999999999 !important;
+}
