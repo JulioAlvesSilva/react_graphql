@@ -3,7 +3,10 @@ import dados from './dados.json';
 import { useState } from "react";
 import styles from './List.module.scss';
 import { FiEdit3 } from "react-icons/fi";
-import { MdOpenWith, MdDeleteOutline } from "react-icons/md";
+import { MdDeleteOutline } from "react-icons/md";
+import { FaBirthdayCake } from "react-icons/fa";
+import { MdWorkHistory } from "react-icons/md";
+import { FaHelmetSafety } from "react-icons/fa6";
 export default function List() {
     const [ativo, setAtivo] = useState("");
     const [over, setOver] = useState(null)
@@ -35,7 +38,6 @@ export default function List() {
                                     <small><strong>Data de entrada: </strong>{item.dataEntrada}</small>
                                     <div className={styles.lista_textos_2pg_icons}>
                                         <FiEdit3 />
-                                        <MdOpenWith />
                                         <MdDeleteOutline data-bs-toggle="modal" data-bs-target="#exampleModal" />
                                     </div>
                                 </div>
@@ -44,19 +46,25 @@ export default function List() {
                     ))}
                 </div>
                 <div className={styles.ctn_rigth}>
-                    <div className={styles.ctn_rigth_1ln}>
+                    {dadosSegregado? 
+                    <>
+                        <div className={styles.ctn_rigth_1ln}>
                         <img src="https://curriculo-silk-seven.vercel.app/imagens/banner/perfil.jpg" alt="foto perfil" />
                         <div className={styles.ctn_rigth_1ln_tx}>
-                            <h4>{dadosSegregado.name}</h4>
-                            <span>{dadosSegregado.dataNascimento}</span>
-                            <span>{dadosSegregado.dataEntrada}</span>
-                            <span>{dadosSegregado.profissao}</span>
+                            <h4 class="d-flex align-items-center">{dadosSegregado.name}</h4>
+                            <span class="d-flex align-items-center"><FaBirthdayCake className="me-2"/> {dadosSegregado.dataNascimento}</span>
+                            <span class="d-flex align-items-center"><MdWorkHistory className="me-2"/>{dadosSegregado.dataEntrada} </span>
+                            <span class="d-flex align-items-center"><FaHelmetSafety className="me-2"/>{dadosSegregado.profissao}</span>
                         </div>
                     </div>
                     <div className={styles.ctn_rigth_2ln}>
                         <p><strong>Habilidades: </strong>{dadosSegregado.habilidades}</p>
                         <p><strong>Resumo: </strong>{dadosSegregado.resumo}</p>
+                        <p><strong>Filiado(a): </strong>{dadosSegregado.sindicalista ? "Sim" : "Não"}</p>
                     </div>
+                    </>    :
+                    <h3 className="text-center mt-4 fw-bold">Clique em algum card</h3>
+                }
                 </div>
             </div>
             <div class={`modal fade ${styles.popup}`} id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

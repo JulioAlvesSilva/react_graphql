@@ -7,6 +7,8 @@ import HeaderMain from './components/header';
 import ListMain from './pages/cardsList';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import MainProject from './pages/main';
+import AddItem from './pages/add';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,7 +16,9 @@ root.render(
     <BrowserRouter>
       <HeaderMain />
       <Routes>
-        <Route path='/' element={<ListMain />} />
+        <Route path='/' element={<MainProject />} />
+        <Route path='/list' element={<ListMain />} />
+        <Route path='/add' element={<AddItem />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
