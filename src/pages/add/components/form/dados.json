@@ -23,6 +23,13 @@
         "tipo":"text"
     },
     {
+        "id":3,
+        "nome": "Salário",
+        "required": "true",
+        "PlaceHolder": "Digite o salário",
+        "tipo":"number"
+    },
+    {
         "id":4,
         "nome": "Data de nascimento",
         "required": "true",

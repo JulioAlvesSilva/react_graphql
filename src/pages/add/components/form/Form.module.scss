@@ -1,29 +1,43 @@
-.formMain{
+.formMain {
     width: 99vw;
     padding: 15px;
     margin: 10px auto;
-    overflow:hidden;
-    h2{
+    overflow: hidden;
+
+    h2 {
         margin-bottom: 20px;
         color: rgb(77, 77, 77);
     }
-    form{
+
+    form {
         border: 1px solid rgba(88, 88, 88, .4);
         border-radius: 20px;
         padding: 20px;
         width: 80%;
         margin: auto;
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
         box-shadow: 10px 10px 10px gray;
-        div{
-            width: 40%;
-            label{
-                font-weight: 600;
-                color: rgb(70, 70, 70);
-                margin-bottom: 5px;
+
+        ul {
+            padding: 20px;
+            width: 100%;
+            margin: auto;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            
+
+            div {
+                width: 40%;
+
+                label {
+                    font-weight: 600;
+                    color: rgb(70, 70, 70);
+                    margin-bottom: 5px;
+                }
             }
+        }
+        button{
+            margin-left: 65px;
         }
     }
 }

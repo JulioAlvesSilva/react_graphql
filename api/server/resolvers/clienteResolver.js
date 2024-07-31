@@ -10,15 +10,15 @@ const resolvers = {
     }
   },
   Mutation: {
-    createCliente: async (_, { nome, profissao, salario, dataNascimento }) => {
-      const cliente = new Cliente({ nome, profissao, salario, dataNascimento });
+    createCliente: async (_, { nome, profissao, salario, dataNascimento, habilidades, resumo, filiado }) => {
+      const cliente = new Cliente({ nome, profissao, salario, dataNascimento, habilidades, resumo, filiado });
       await cliente.save();
       return cliente;
     },
-    updateCliente: async (_, { id, nome, profissao, salario, dataNascimento, dataEntrada }) => {
+    updateCliente: async (_, { id, nome, profissao, salario, dataNascimento, dataEntrada, habilidades, resumo, filiado }) => {
       return await Cliente.findByIdAndUpdate(
         id,
-        { nome, profissao, salario, dataNascimento, dataEntrada },
+        { nome, profissao, salario, dataNascimento, dataEntrada, habilidades, resumo, filiado },
         { new: true }
       );
     },

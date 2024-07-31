@@ -1,16 +1,30 @@
 import { Link } from "react-router-dom";
-import dados from './dados.json';
+/* import dados from './dados.json'; */
 import { useState } from "react";
+import { GET_CLIENTES } from '../../../../services/query';
 import styles from './List.module.scss';
 import { FiEdit3 } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
 import { FaBirthdayCake } from "react-icons/fa";
 import { MdWorkHistory } from "react-icons/md";
 import { FaHelmetSafety } from "react-icons/fa6";
+import { useQuery } from "@apollo/client";
 export default function List() {
+    const { loading, error, data } = useQuery(GET_CLIENTES);
     const [ativo, setAtivo] = useState("");
     const [over, setOver] = useState(null)
-    const dadosSegregado = dados.find(item => item.id === over)
+
+    if (loading) return <p>Carregando...</p>;
+    if (error) return <p>Erro: {error.message}</p>;
+    const dadosClientes = data.getClientes;
+    console.log(dadosClientes)
+    function formatDate(dateString) {
+        const date = new Date(Number(dateString));
+        const dateLocal = date.toLocaleDateString('pt-BR')
+        return dateLocal
+    }
+    const dadosSegregado = dadosClientes.find(item => item.id === over);
+
     return (
         <div className={`list-group shadow-lg py-2 ${styles.container}`}>
             <div className={styles.titulo}>
@@ -18,24 +32,24 @@ export default function List() {
             </div>
             <div className={styles.ctn}>
                 <div className={styles.ctn_left}>
-                    {dados.map(item => (
+                    {dadosClientes.map(item => (
                         <Link to="#"
-                            className={`list-group-item list-group-item-action d-flex ${ativo === item.name ? `active ${styles.zoom}` : ""} ${styles.lista}`}
+                            className={`list-group-item list-group-item-action d-flex ${ativo === item.id ? `active ${styles.zoom}` : ""} ${styles.lista}`}
                             key={item.name}
                             onClick={() => {
-                                setAtivo(item.name);
+                                setAtivo(item.id);
                                 setOver(item.id)
                             }}
                         >
                             <img src="https://curriculo-silk-seven.vercel.app/imagens/banner/perfil.jpg" alt="foto perfil" className={styles.lista_fotoPerfil} />
                             <div className={styles.lista_textos}>
                                 <div className={styles.lista_textos_1pg}>
-                                    <h5>{item.name}</h5>
+                                    <h5>{item.nome}</h5>
                                     <small>{item.profissao}</small>
                                 </div>
                                 <div className={styles.lista_textos_2pg}>
-                                    <small><strong>Data de nascimento: </strong>{item.dataNascimento}</small>
-                                    <small><strong>Data de entrada: </strong>{item.dataEntrada}</small>
+                                    <small><strong>Data de nascimento: </strong>{formatDate(item.dataNascimento)}</small>
+                                    <small><strong>Data de entrada: </strong>{formatDate(item.dataEntrada)}</small>
                                     <div className={styles.lista_textos_2pg_icons}>
                                         <FiEdit3 />
                                         <MdDeleteOutline data-bs-toggle="modal" data-bs-target="#exampleModal" />
@@ -46,25 +60,25 @@ export default function List() {
                     ))}
                 </div>
                 <div className={styles.ctn_rigth}>
-                    {dadosSegregado? 
-                    <>
-                        <div className={styles.ctn_rigth_1ln}>
-                        <img src="https://curriculo-silk-seven.vercel.app/imagens/banner/perfil.jpg" alt="foto perfil" />
-                        <div className={styles.ctn_rigth_1ln_tx}>
-                            <h4 class="d-flex align-items-center">{dadosSegregado.name}</h4>
-                            <span class="d-flex align-items-center"><FaBirthdayCake className="me-2"/> {dadosSegregado.dataNascimento}</span>
-                            <span class="d-flex align-items-center"><MdWorkHistory className="me-2"/>{dadosSegregado.dataEntrada} </span>
-                            <span class="d-flex align-items-center"><FaHelmetSafety className="me-2"/>{dadosSegregado.profissao}</span>
-                        </div>
-                    </div>
-                    <div className={styles.ctn_rigth_2ln}>
-                        <p><strong>Habilidades: </strong>{dadosSegregado.habilidades}</p>
-                        <p><strong>Resumo: </strong>{dadosSegregado.resumo}</p>
-                        <p><strong>Filiado(a): </strong>{dadosSegregado.sindicalista ? "Sim" : "Não"}</p>
-                    </div>
-                    </>    :
-                    <h3 className="text-center mt-4 fw-bold">Clique em algum card</h3>
-                }
+                    {dadosSegregado ?
+                        <>
+                            <div className={styles.ctn_rigth_1ln}>
+                                <img src="https://curriculo-silk-seven.vercel.app/imagens/banner/perfil.jpg" alt="foto perfil" />
+                                <div className={styles.ctn_rigth_1ln_tx}>
+                                    <h4 class="d-flex align-items-center">{dadosSegregado.name}</h4>
+                                    <span class="d-flex align-items-center"><FaBirthdayCake className="me-2" /> {formatDate(dadosSegregado.dataNascimento)}</span>
+                                    <span class="d-flex align-items-center"><MdWorkHistory className="me-2" />{formatDate(dadosSegregado.dataEntrada)} </span>
+                                    <span class="d-flex align-items-center"><FaHelmetSafety className="me-2" />{dadosSegregado.profissao}</span>
+                                </div>
+                            </div>
+                            <div className={styles.ctn_rigth_2ln}>
+                                <p><strong>Habilidades: </strong>{dadosSegregado.habilidades}</p>
+                                <p><strong>Resumo: </strong>{dadosSegregado.resumo}</p>
+                                <p><strong>Filiado(a): </strong>{dadosSegregado.sindicalista ? "Sim" : "Não"}</p>
+                            </div>
+                        </> :
+                        <h3 className="text-center mt-4 fw-bold">Clique em algum card</h3>
+                    }
                 </div>
             </div>
             <div class={`modal fade ${styles.popup}`} id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

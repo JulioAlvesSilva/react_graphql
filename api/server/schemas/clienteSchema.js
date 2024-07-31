@@ -6,6 +6,9 @@ const typeDefs = gql`
     nome: String!
     profissao: String!
     salario: Float!
+    habilidades: String!
+    resumo: String!
+    filiado: Boolean!
     dataNascimento: String!
     dataEntrada: String!
   }
@@ -16,8 +19,8 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createCliente(nome: String!, profissao: String!, salario: Float!, dataNascimento: String!): Cliente
-    updateCliente(id: ID!, nome: String, profissao: String, salario: Float, dataNascimento: String, dataEntrada: String): Cliente
+    createCliente(nome: String!, profissao: String!, salario: Float!, habilidades: String!, resumo: String!, filiado: Boolean!, dataNascimento: String!): Cliente
+    updateCliente(id: ID!, nome: String, profissao: String, salario: Float, habilidades: String!, resumo: String!, filiado: Boolean!, dataNascimento: String, dataEntrada: String): Cliente
     deleteCliente(id: ID!): Cliente
   }
 `;
