@@ -1,13 +1,13 @@
 [
     {
-        "id":1,
+        "id":"nome",
         "nome": "Nome",
         "required": "true",
         "PlaceHolder": "Digite o nome",
         "tipo":"text"
     },
     {
-        "id":2,
+        "id":"telefone",
         "nome": "Telefone",
         "required": "true",
         "PlaceHolder": "Digite o telefone",
@@ -16,35 +16,28 @@
         "minWidth":11
     },
     {
-        "id":3,
+        "id":"profissao",
         "nome": "Profissão",
         "required": "true",
         "PlaceHolder": "Digite o cargo",
         "tipo":"text"
     },
     {
-        "id":3,
+        "id":"salario",
         "nome": "Salário",
         "required": "true",
         "PlaceHolder": "Digite o salário",
         "tipo":"number"
     },
     {
-        "id":4,
+        "id":"dataNascimento",
         "nome": "Data de nascimento",
         "required": "true",
         "PlaceHolder": "",
         "tipo":"date"
     },
     {
-        "id":5,
-        "nome": "Data de entrada",
-        "required": "true",
-        "PlaceHolder": "",
-        "tipo":"date"
-    },
-    {
-        "id":6,
+        "id":"habilidades",
         "nome": "Habilidades",
         "required": "true",
         "PlaceHolder": "Digite as skils do colaborador",

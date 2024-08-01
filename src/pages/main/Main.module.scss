@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap');
+.main{
+    background-color: #36846b;
+    width: 100vw;
+    height: 86.7vh;
+    display: flex;
+    justify-content: center;
+    &_ctn{
+        border: 1px solid rgba(218, 218, 218, .5);
+        background-color: #4bb39a;
+        height: 90%;
+        width: 50%;
+        margin: auto;
+        border-radius: 30px;
+        &_logo{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            svg{
+                padding: 0;
+                margin: 0;
+            }
+            h1{
+                font-family: "Jaro", sans-serif;
+                position: absolute;
+                top: 150px;
+                color: #e6e696;
+                text-shadow:
+                -1px -1px 0 gray,   /* Superior esquerda */
+                1px -1px 0 gray,   /* Superior direita */
+               -1px  1px 0 gray,   /* Inferior esquerda */
+                1px  1px 0 gray; 
+                
+                ;
+            }
+        }
+        &_btns{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 80px;
+            a{
+                text-decoration: none;
+                color: rgb(255, 255, 255);
+                background-color: #385b66;
+                padding: 15px;
+                font-size: 1.2rem;
+                font-weight: 800;
+                border-radius: 20px;
+                border: 1px solid gray;
+                width: 250px;
+                text-align: center;
+                margin-bottom: 20px;
+                &:hover{
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+}

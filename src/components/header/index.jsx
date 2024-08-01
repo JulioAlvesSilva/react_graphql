@@ -13,12 +13,6 @@ export default function HeaderMain() {
                         <li className="nav-item active">
                             <Link className="nav-link text-light" to="/">Pagina principal <span className="sr-only">(current)</span></Link>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link text-light" to="/add">Adicionar</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link text-light" to="/list">Lista</Link>
-                        </li>
                         <li class="nav-item dropdown">
                             <Link class="nav-link dropdown-toggle text-light" to="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Ordenar por
