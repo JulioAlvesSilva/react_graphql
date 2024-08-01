@@ -23,7 +23,16 @@ const resolvers = {
       );
     },
     deleteCliente: async (_, { id }) => {
-      return await Cliente.findByIdAndRemove(id);
+      try {
+        const cliente = await Cliente.findByIdAndDelete(id);
+        if (!cliente) {
+          throw new Error('Cliente não encontrado');
+        }
+        return cliente;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Erro ao deletar cliente');
+      }
     }
   }
 };

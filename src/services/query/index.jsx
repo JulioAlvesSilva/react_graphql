@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 
-const GET_CLIENTES = gql `
+const GET_CLIENTES = gql`
 query GetClientes {
     getClientes {
       id
@@ -24,8 +24,7 @@ const CREATE_CLIENTE = gql`
     $habilidades: String!,
     $resumo: String!,
     $filiado: Boolean!,
-    $dataNascimento: String!,
-    $dataEntrada: String!
+    $dataNascimento: String!
   ) {
     createCliente(
       nome: $nome,
@@ -34,8 +33,7 @@ const CREATE_CLIENTE = gql`
       habilidades: $habilidades,
       resumo: $resumo,
       filiado: $filiado,
-      dataNascimento: $dataNascimento,
-      dataEntrada: $dataEntrada
+      dataNascimento: $dataNascimento
     ) {
       id
       nome
@@ -49,4 +47,12 @@ const CREATE_CLIENTE = gql`
     }
   }
 `;
-export {CREATE_CLIENTE, GET_CLIENTES}
+const DELETE_CLIENTE = gql`
+  mutation DeleteCliente($id: ID!) {
+    deleteCliente(id: $id) {
+      id
+      nome
+    }
+  }
+`
+export { CREATE_CLIENTE, GET_CLIENTES, DELETE_CLIENTE }

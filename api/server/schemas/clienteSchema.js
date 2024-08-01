@@ -20,7 +20,7 @@ const typeDefs = gql`
 
   type Mutation {
     createCliente(nome: String!, profissao: String!, salario: Float!, habilidades: String!, resumo: String!, filiado: Boolean!, dataNascimento: String!): Cliente
-    updateCliente(id: ID!, nome: String, profissao: String, salario: Float, habilidades: String!, resumo: String!, filiado: Boolean!, dataNascimento: String, dataEntrada: String): Cliente
+    updateCliente(id: ID!, nome: String, profissao: String, salario: Float, habilidades: String!, resumo: String!, filiado: Boolean!, dataNascimento: String): Cliente
     deleteCliente(id: ID!): Cliente
   }
 `;

@@ -1,29 +1,52 @@
 import { Link } from "react-router-dom";
 /* import dados from './dados.json'; */
 import { useState } from "react";
-import { GET_CLIENTES } from '../../../../services/query';
+import { DELETE_CLIENTE, GET_CLIENTES } from '../../../../services/query';
 import styles from './List.module.scss';
 import { FiEdit3 } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
 import { FaBirthdayCake } from "react-icons/fa";
 import { MdWorkHistory } from "react-icons/md";
 import { FaHelmetSafety } from "react-icons/fa6";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 export default function List() {
     const { loading, error, data } = useQuery(GET_CLIENTES);
     const [ativo, setAtivo] = useState("");
-    const [over, setOver] = useState(null)
+    const [over, setOver] = useState(null);
+    const [deletarID, setDeletarID] = useState("");
+    console.log(deletarID)
+    const [deleteCliente] = useMutation(DELETE_CLIENTE, {
+        refetchQueries: [{ query: GET_CLIENTES }],
+        onCompleted: () => {
+            alert("Cliente deletado com sucesso");
+        },
+        onError: (error) => {
+            console.error("Erro ao deletar cliente:", error);
+            alert("Erro ao deletar cliente");
+        }
+    });
 
     if (loading) return <p>Carregando...</p>;
     if (error) return <p>Erro: {error.message}</p>;
+
     const dadosClientes = data.getClientes;
-    console.log(dadosClientes)
+
     function formatDate(dateString) {
         const date = new Date(Number(dateString));
         const dateLocal = date.toLocaleDateString('pt-BR')
         return dateLocal
     }
     const dadosSegregado = dadosClientes.find(item => item.id === over);
+
+    async function deletarClienteID(id) {
+        try {
+            await deleteCliente({
+                variables: { id }
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <div className={`list-group shadow-lg py-2 ${styles.container}`}>
@@ -52,7 +75,11 @@ export default function List() {
                                     <small><strong>Data de entrada: </strong>{formatDate(item.dataEntrada)}</small>
                                     <div className={styles.lista_textos_2pg_icons}>
                                         <FiEdit3 />
-                                        <MdDeleteOutline data-bs-toggle="modal" data-bs-target="#exampleModal" />
+                                        <MdDeleteOutline
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal"
+                                            onClick={() => setDeletarID(item.id)}
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +121,7 @@ export default function List() {
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                                onClick={() => alert("Ola")}
+                                onClick={() => deletarClienteID(deletarID)}
                             >Sim</button>
                         </div>
                     </div>
