@@ -4,7 +4,7 @@ import dados from './dados.json';
 import { useMutation } from '@apollo/client';
 import { CREATE_CLIENTE, GET_CLIENTES } from '../../../../services/query';
 
-export default function FormAdd() {
+export default function CardEdit() {
 
     const [createCliente] = useMutation(CREATE_CLIENTE, {
         refetchQueries: [{ query: GET_CLIENTES }],
@@ -71,7 +71,7 @@ export default function FormAdd() {
 
     return (
         <section className={styles.formMain}>
-            <h2 className='text-center fw-bold'>Formulário de adição</h2>
+            <h2 className='text-center fw-bold'>Formulário de edição</h2>
             <form onSubmit={submit}>
                 <ul>
                     {dados?.map(item => (

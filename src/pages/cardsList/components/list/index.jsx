@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-/* import dados from './dados.json'; */
 import { useState } from "react";
 import { DELETE_CLIENTE, GET_CLIENTES } from '../../../../services/query';
 import styles from './List.module.scss';
@@ -10,11 +9,9 @@ import { MdWorkHistory } from "react-icons/md";
 import { FaHelmetSafety } from "react-icons/fa6";
 import { useMutation, useQuery } from "@apollo/client";
 export default function List() {
+    
     const { loading, error, data } = useQuery(GET_CLIENTES);
-    const [ativo, setAtivo] = useState("");
-    const [over, setOver] = useState(null);
-    const [deletarID, setDeletarID] = useState("");
-    console.log(deletarID)
+
     const [deleteCliente] = useMutation(DELETE_CLIENTE, {
         refetchQueries: [{ query: GET_CLIENTES }],
         onCompleted: () => {
@@ -25,6 +22,9 @@ export default function List() {
             alert("Erro ao deletar cliente");
         }
     });
+    const [ativo, setAtivo] = useState("");
+    const [over, setOver] = useState(null);
+    const [deletarID, setDeletarID] = useState("");
 
     if (loading) return <p>Carregando...</p>;
     if (error) return <p>Erro: {error.message}</p>;
@@ -36,7 +36,7 @@ export default function List() {
         const dateLocal = date.toLocaleDateString('pt-BR')
         return dateLocal
     }
-    const dadosSegregado = dadosClientes.find(item => item.id === over);
+    const dadosSegregado = dadosClientes?.find(item => item.id === over);
 
     async function deletarClienteID(id) {
         try {
@@ -55,7 +55,7 @@ export default function List() {
             </div>
             <div className={styles.ctn}>
                 <div className={styles.ctn_left}>
-                    {dadosClientes.map(item => (
+                    {dadosClientes?.map(item => (
                         <Link to="#"
                             className={`list-group-item list-group-item-action d-flex ${ativo === item.id ? `active ${styles.zoom}` : ""} ${styles.lista}`}
                             key={item.name}
@@ -92,10 +92,10 @@ export default function List() {
                             <div className={styles.ctn_rigth_1ln}>
                                 <img src="https://curriculo-silk-seven.vercel.app/imagens/banner/perfil.jpg" alt="foto perfil" />
                                 <div className={styles.ctn_rigth_1ln_tx}>
-                                    <h4 class="d-flex align-items-center">{dadosSegregado.name}</h4>
-                                    <span class="d-flex align-items-center"><FaBirthdayCake className="me-2" /> {formatDate(dadosSegregado.dataNascimento)}</span>
-                                    <span class="d-flex align-items-center"><MdWorkHistory className="me-2" />{formatDate(dadosSegregado.dataEntrada)} </span>
-                                    <span class="d-flex align-items-center"><FaHelmetSafety className="me-2" />{dadosSegregado.profissao}</span>
+                                    <h4 className="d-flex align-items-center">{dadosSegregado.name}</h4>
+                                    <span className="d-flex align-items-center"><FaBirthdayCake className="me-2" /> {formatDate(dadosSegregado.dataNascimento)}</span>
+                                    <span className="d-flex align-items-center"><MdWorkHistory className="me-2" />{formatDate(dadosSegregado.dataEntrada)} </span>
+                                    <span className="d-flex align-items-center"><FaHelmetSafety className="me-2" />{dadosSegregado.profissao}</span>
                                 </div>
                             </div>
                             <div className={styles.ctn_rigth_2ln}>
@@ -108,19 +108,19 @@ export default function List() {
                     }
                 </div>
             </div>
-            <div class={`modal fade ${styles.popup}`} id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Deleção</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div className={`modal fade ${styles.popup}`} id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Deleção</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                             Você realmente deseja excluir o card?
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal"
                                 onClick={() => deletarClienteID(deletarID)}
                             >Sim</button>
                         </div>

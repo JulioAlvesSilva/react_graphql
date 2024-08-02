@@ -13,14 +13,14 @@ export default function HeaderMain() {
                         <li className="nav-item active">
                             <Link className="nav-link text-light" to="/">Pagina principal <span className="sr-only">(current)</span></Link>
                         </li>
-                        <li class="nav-item dropdown">
-                            <Link class="nav-link dropdown-toggle text-light" to="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <li className="nav-item dropdown">
+                            <Link className="nav-link dropdown-toggle text-light" to="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Ordenar por
                             </Link>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><Link class="dropdown-item" to="">Action</Link></li>
-                                <li><Link class="dropdown-item" to="">Another action</Link></li>
-                                <li><Link class="dropdown-item" to="">Something else here</Link></li>
+                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><Link className="dropdown-item" to="">Action</Link></li>
+                                <li><Link className="dropdown-item" to="">Another action</Link></li>
+                                <li><Link className="dropdown-item" to="">Something else here</Link></li>
                             </ul>
                         </li>
                     </ul>
